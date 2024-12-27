@@ -1,4 +1,5 @@
-import fs from 'fs';
+import {processFile} from '../utils';
+
 
 function isReportSafe(levels) {
     if (levels.length < 2) return true;
@@ -34,16 +35,6 @@ function countSafeReports(input) {
     return safeCount;
 }
 
-function processFile(filename) {
-    try {
-        const data = fs.readFileSync(filename, 'utf8');
-        const result = countSafeReports(data);
-        console.log(`Number of safe reports: ${result}`);
-        return result;
-    } catch (err) {
-        console.error('Error reading or processing file:', err);
-        return null;
-    }
-}
+
 
 processFile('input.txt');
