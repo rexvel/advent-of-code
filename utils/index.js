@@ -1,12 +1,11 @@
 import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-export function processFile(filename) {
-    try {
-        const data = fs.readFileSync(filename, 'utf8');
-        const result = countSafeReports(data);
-        console.log(`Number of safe reports: ${result}`);
-        return result;
-    } catch (err) {
-        console.error('Error reading or processing file:', err);
-    }
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+export async function processInput(filename) {
+    const input = fs.readFileSync(path.join(__dirname)+`/${filename}.txt`, 'utf-8');
+    return Promise.resolve(input);
 }
