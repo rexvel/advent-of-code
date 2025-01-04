@@ -5,8 +5,6 @@ import { dirname } from 'path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-
-
 function parseInput(input) {
     const [rulesSection, sequencesSection] = input.trim().split('\n\n');
     

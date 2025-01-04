@@ -1,10 +1,3 @@
-import fs from 'fs';
-
-const inputData = fs.readFileSync('input.txt', 'utf8').split('\n');
-
-console.log(`inputData`, inputData);
-
-
 function readColumns(filePath) {
     const fileContent = fs.readFileSync(filePath, 'utf8');
     
@@ -57,6 +50,5 @@ function calculateSimilarityScore(leftList, rightList) {
         return score + (leftNum * occurrences);
     }, 0);
 }
-
 
 console.log(calculateSimilarityScore(left, right)); 
