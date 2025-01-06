@@ -1,12 +1,15 @@
 {
-  "name": "advent_of_code",
-  "version": "1.0.0",
-  "main": "day1.js",
-  "scripts": {
-   "debug": "NODE_OPTIONS='--inspect' node"
-  },
-  "type": "module",
-  "author": "",
-  "license": "ISC",
-  "description": ""
+ "name": "advent_of_code",
+ "version": "1.0.0",
+ "main": "day1.js",
+ "scripts": {
+  "debug": "NODE_OPTIONS='--inspect' node"
+ },
+ "type": "module",
+ "author": "",
+ "license": "ISC",
+ "description": "",
+ "devDependencies": {
+  "vitest": "^2.1.8"
+ }
 }
