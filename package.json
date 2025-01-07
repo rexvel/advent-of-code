@@ -3,13 +3,16 @@
  "version": "1.0.0",
  "main": "day1.js",
  "scripts": {
-  "debug": "NODE_OPTIONS='--inspect' node"
+  "debug": "NODE_OPTIONS='--inspect' node",
+  "test:watch": "vitest watch",
+  "test:coverage": "vitest run --coverage"
  },
  "type": "module",
  "author": "",
  "license": "ISC",
  "description": "",
  "devDependencies": {
+  "@vitest/coverage-v8": "^2.1.8",
   "vitest": "^2.1.8"
  }
 }
