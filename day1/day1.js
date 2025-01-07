@@ -1,31 +1,53 @@
-function readColumns(filePath) {
-    const fileContent = fs.readFileSync(filePath, 'utf8');
-    
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export const getFileContent = (filePath) => {
+    try {
+        const absolutePath = path.isAbsolute(filePath)
+            ? filePath
+            : path.resolve(__dirname, filePath);
+
+        const fileContent = fs.readFileSync(absolutePath, 'utf8');
+
+        const columns = fileContent.split('\n');
+
+        return columns;
+    } catch (e) {
+        console.error(`Error reading file: ${filePath}`);
+        throw e;
+    }
+
+}
+
+export function readColumns() {
+
     const firstColumn = [];
     const secondColumn = [];
-    
-    const lines = fileContent.split('\n');
-    
-    lines.forEach(line => {
+
+    columns.forEach(line => {
         if (line.trim() === '') return;
-        
+
         const numbers = line.trim().split(/\s+/);
-        
+
         if (numbers.length === 2) {
             firstColumn.push(Number(numbers[0]));
             secondColumn.push(Number(numbers[1]));
         }
     });
-    
+
     return { firstColumn, secondColumn };
 }
-const { firstColumn:left, secondColumn:right } = readColumns('input.txt');
 
-console.log(`left`, left);
-console.log(`right`, right);
+const columns = getFileContent('input.txt');
+
+const { firstColumn: left, secondColumn: right } = readColumns(columns);
 
 
-function calculateDistance(leftList, rightList) {
+export function calculateDistance(leftList, rightList) {
 
     if (leftList.length !== rightList.length) {
         throw new Error("Lists must be of equal length");
@@ -44,11 +66,14 @@ function calculateDistance(leftList, rightList) {
 }
 
 
-function calculateSimilarityScore(leftList, rightList) {
+
+export function calculateSimilarityScore(leftList, rightList) {
     return leftList.reduce((score, leftNum) => {
         const occurrences = rightList.filter(rightNum => rightNum === leftNum).length;
         return score + (leftNum * occurrences);
     }, 0);
 }
 
-console.log(calculateSimilarityScore(left, right)); 
+
+console.log(calculateDistance([3, 4, 25, 22, 3, 3],  [4, 3, 15, 3, 94, 3])); 
+console.log(calculateSimilarityScore([3, 4, 25, 22, 3, 3],  [4, 3, 15, 3, 94, 3])); 
